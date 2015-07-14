@@ -41,6 +41,7 @@ public class GuavaCollectorsTest {
         Stream.of(1, 1).collect(GuavaCollectors.toImmutableMap(Object::toString, UnaryOperator.identity()));
     }
 
+    @Test
     public void testDuplicatedMapEntryWithMergeFunction() {
         ImmutableMap<String, Integer> map = Stream.of(1, 1).collect(
                 GuavaCollectors.toImmutableMap(Object::toString,
