@@ -2,8 +2,8 @@ package jp.skypencil.guava;
 
 import java.util.Optional;
 
-class Java8OptionalMethod {
+class Java8OptionalReturn {
     Optional<String> method() {
-        return Optional.empty();
+        return null;
     }
 }

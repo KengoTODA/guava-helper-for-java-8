@@ -2,8 +2,8 @@ package jp.skypencil.guava;
 
 import com.google.common.base.Optional;
 
-class GuavaOptionalMethod {
+class GuavaOptionalReturn {
     Optional<String> method(){
-        return Optional.absent();
+        return null;
     }
 }

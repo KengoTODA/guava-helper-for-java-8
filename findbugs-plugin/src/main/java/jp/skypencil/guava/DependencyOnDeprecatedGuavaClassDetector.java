@@ -3,6 +3,8 @@ package jp.skypencil.guava;
 import java.util.Map;
 
 import org.apache.bcel.classfile.Field;
+import org.apache.bcel.classfile.Method;
+import org.apache.bcel.generic.Type;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -44,15 +46,30 @@ public class DependencyOnDeprecatedGuavaClassDetector extends BytecodeScanningDe
 
     @Override
     public void visitField(Field field) {
+        check(field.getType());
+
+        super.visitField(field);
+    }
+
+    @Override
+    public void visitMethod(Method method) {
+        check(method.getReturnType());
+        for (Type type : method.getArgumentTypes()) {
+            check(type);
+        }
+
+        super.visitMethod(method);
+    }
+
+    private void check(Type type) {
         @DottedClassName
-        String referenced = field.getType().toString();
+        String referenced = type.toString();
         @SlashedClassName
         String replacement = replacements.get(referenced.replace('.', '/'));
 
         if (replacement != null) {
             report(referenced, replacement.replace('/', '.'));
         }
-        super.visitField(field);
     }
 
     private void report(@DottedClassName String referenced, @DottedClassName String replacement) {
