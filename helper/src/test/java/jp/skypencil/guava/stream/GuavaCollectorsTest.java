@@ -1,5 +1,6 @@
 package jp.skypencil.guava.stream;
 
+import java.util.function.Function;
 import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
@@ -8,6 +9,8 @@ import org.junit.Test;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableTable;
+import com.google.common.collect.Table;
 import com.google.common.truth.Truth;
 
 public class GuavaCollectorsTest {
@@ -49,5 +52,55 @@ public class GuavaCollectorsTest {
                         (existing, newValue) -> existing));
         Truth.assertThat(map).containsEntry("1", 1);
         Truth.assertThat(map).hasSize(1);
+    }
+
+    @Test
+    public void testCollectToTable() {
+        Table<String, String, Integer> table = Stream.of(10, 11).collect(
+                GuavaCollectors.toTable(Object::toString, this::generateColumn, Function.identity()));
+        Truth.assertThat(table).hasSize(2);
+        Truth.assertThat(table).containsCell("10", "column", 10);
+        Truth.assertThat(table).containsCell("11", "column", 11);
+    }
+
+    @Test
+    public void testCollectToImmutableTable() {
+        ImmutableTable<String, String, Integer> table = Stream.of(10, 11).collect(
+                GuavaCollectors.toImmutableTable(Object::toString, this::generateColumn, Function.identity()));
+        Truth.assertThat(table).hasSize(2);
+        Truth.assertThat(table).containsCell("10", "column", 10);
+        Truth.assertThat(table).containsCell("11", "column", 11);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testDuplicatedTableCell() {
+        Stream.of(10, 10).collect(GuavaCollectors.toTable(Object::toString, this::generateColumn, Function.identity()));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testDuplicatedImmutableTableCell() {
+        Stream.of(10, 10).collect(GuavaCollectors.toImmutableTable(Object::toString, this::generateColumn, Function.identity()));
+    }
+
+    @Test
+    public void testDuplicatedTableCellWithMergeFunction() {
+        Table<String, String, Integer> table = Stream.of(10, 10).collect(
+                GuavaCollectors.toTable(Object::toString, this::generateColumn, Function.identity(),
+                        (existing, newValue) -> existing));
+        Truth.assertThat(table).containsCell("10", "column", 10);
+        Truth.assertThat(table).hasSize(1);
+    }
+
+    @Test
+    public void testDuplicatedImmutableTableCellWithMergeFunction() {
+        ImmutableTable<String, String, Integer> table = Stream.of(10, 10).collect(
+                GuavaCollectors.toImmutableTable(Object::toString, this::generateColumn, Function.identity(),
+                        (existing, newValue) -> existing));
+        Truth.assertThat(table).containsCell("10", "column", 10);
+        Truth.assertThat(table).hasSize(1);
+    }
+
+    private String generateColumn(Object object) {
+        return "column";
     }
 }
