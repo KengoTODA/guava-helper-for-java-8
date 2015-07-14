@@ -10,6 +10,7 @@ import java.util.stream.Collector;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
+import com.google.common.collect.ImmutableSet;
 
 public class GuavaCollectors {
     public static <T> Collector<T, ?, ImmutableList<T>> toImmutableList() {
@@ -32,7 +33,36 @@ public class GuavaCollectors {
 
             @Override
             public Function<Builder<T>, ImmutableList<T>> finisher() {
-                return (builder) -> builder.build();
+                return ImmutableList.Builder::build;
+            }
+
+            @Override
+            public Set<java.util.stream.Collector.Characteristics> characteristics() {
+                return EnumSet.noneOf(java.util.stream.Collector.Characteristics.class);
+            }
+        };
+    }
+
+    public static <T> Collector<T, ?, ImmutableSet<T>> toImmutableSet() {
+        return new Collector<T, ImmutableSet.Builder<T>, ImmutableSet<T>>(){
+            @Override
+            public Supplier<com.google.common.collect.ImmutableSet.Builder<T>> supplier() {
+                return ImmutableSet::builder;
+            }
+
+            @Override
+            public BiConsumer<com.google.common.collect.ImmutableSet.Builder<T>, T> accumulator() {
+                return (builder, value) -> builder.add(value);
+            }
+
+            @Override
+            public BinaryOperator<com.google.common.collect.ImmutableSet.Builder<T>> combiner() {
+                return (builder, another) -> builder.addAll(another.build());
+            }
+
+            @Override
+            public Function<com.google.common.collect.ImmutableSet.Builder<T>, ImmutableSet<T>> finisher() {
+                return ImmutableSet.Builder::build;
             }
 
             @Override
