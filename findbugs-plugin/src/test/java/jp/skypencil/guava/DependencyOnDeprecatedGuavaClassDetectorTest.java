@@ -15,8 +15,11 @@ public class DependencyOnDeprecatedGuavaClassDetectorTest {
                 bugReporter);
 
         assertNoBugsReported(Java8OptionalField.class, detector, bugReporter);
+        assertNoBugsReported(Java8OptionalFieldWithInitialization.class, detector, bugReporter);
         assertNoBugsReported(Java8OptionalMethod.class, detector, bugReporter);
         assertBugReported(GuavaOptionalField.class, detector, bugReporter,
+                ofType("GUAVA_DEPEND_ON_DEPRECATED_CLASS"));
+        assertBugReported(GuavaOptionalFieldWithInitialization.class, detector, bugReporter,
                 ofType("GUAVA_DEPEND_ON_DEPRECATED_CLASS"));
         assertBugReported(GuavaOptionalMethod.class, detector, bugReporter,
                 ofType("GUAVA_DEPEND_ON_DEPRECATED_CLASS"));

@@ -2,6 +2,8 @@ package jp.skypencil.guava;
 
 import java.util.Map;
 
+import org.apache.bcel.classfile.Field;
+
 import com.google.common.collect.ImmutableMap;
 
 import edu.umd.cs.findbugs.BugInstance;
@@ -40,12 +42,25 @@ public class DependencyOnDeprecatedGuavaClassDetector extends BytecodeScanningDe
         return super.beforeOpcode(seen);
     }
 
+    @Override
+    public void visitField(Field field) {
+        @DottedClassName
+        String referenced = field.getType().toString();
+        @SlashedClassName
+        String replacement = replacements.get(referenced.replace('.', '/'));
+
+        if (replacement != null) {
+            report(referenced, replacement.replace('/', '.'));
+        }
+        super.visitField(field);
+    }
+
     private void report(@DottedClassName String referenced, @DottedClassName String replacement) {
         BugInstance bug = new BugInstance(this, "GUAVA_DEPEND_ON_DEPRECATED_CLASS", NORMAL_PRIORITY);
         bug.addString(referenced);
         bug.addString(replacement);
-        bug.addSourceLine(this);
         if (this.visitingMethod()) {
+            bug.addSourceLine(this);
             bug.addClassAndMethod(this);
         } else if (this.visitingField()) {
             bug.addField(this);
