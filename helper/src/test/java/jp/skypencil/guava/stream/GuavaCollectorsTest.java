@@ -1,10 +1,12 @@
 package jp.skypencil.guava.stream;
 
+import java.util.function.UnaryOperator;
 import java.util.stream.Stream;
 
 import org.junit.Test;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.truth.Truth;
 
@@ -25,4 +27,17 @@ public class GuavaCollectorsTest {
         Truth.assertThat(set).hasSize(2);
     }
 
+    @Test
+    public void testCollectToImmutableMap() {
+        ImmutableMap<String, Integer> map = Stream.of(1, 2)
+                .collect(GuavaCollectors.toImmutableMap(Object::toString, UnaryOperator.identity()));
+        Truth.assertThat(map).containsEntry("1", 1);
+        Truth.assertThat(map).containsEntry("2", 2);
+        Truth.assertThat(map).hasSize(2);
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testDuplicatedMapEntry() {
+        Stream.of(1, 1).collect(GuavaCollectors.toImmutableMap(Object::toString, UnaryOperator.identity()));
+    }
 }
