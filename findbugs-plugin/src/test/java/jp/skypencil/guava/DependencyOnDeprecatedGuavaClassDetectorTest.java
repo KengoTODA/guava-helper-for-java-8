@@ -52,13 +52,35 @@ public class DependencyOnDeprecatedGuavaClassDetectorTest {
     }
 
     @Test
-    public void detectReturnedValue() throws Exception {
+    public void detectMethodArgumentInInterface() throws Exception {
+        BugReporter bugReporter = bugReporterForTesting();
+        DependencyOnDeprecatedGuavaClassDetector detector = new DependencyOnDeprecatedGuavaClassDetector(
+                bugReporter);
+
+        assertNoBugsReported(Java8OptionalInterfaceMethodArgument.class, detector, bugReporter);
+        assertBugReported(GuavaOptionalInterfaceMethodArgument.class, detector, bugReporter,
+                ofType("GUAVA_DEPEND_ON_DEPRECATED_CLASS"));
+    }
+
+    @Test
+    public void detectReturnedType() throws Exception {
         BugReporter bugReporter = bugReporterForTesting();
         DependencyOnDeprecatedGuavaClassDetector detector = new DependencyOnDeprecatedGuavaClassDetector(
                 bugReporter);
 
         assertNoBugsReported(Java8OptionalReturn.class, detector, bugReporter);
         assertBugReported(GuavaOptionalReturn.class, detector, bugReporter,
+                ofType("GUAVA_DEPEND_ON_DEPRECATED_CLASS"));
+    }
+
+    @Test
+    public void detectReturnedTypeInInterface() throws Exception {
+        BugReporter bugReporter = bugReporterForTesting();
+        DependencyOnDeprecatedGuavaClassDetector detector = new DependencyOnDeprecatedGuavaClassDetector(
+                bugReporter);
+
+        assertNoBugsReported(Java8OptionalInterfaceReturn.class, detector, bugReporter);
+        assertBugReported(GuavaOptionalInterfaceReturn.class, detector, bugReporter,
                 ofType("GUAVA_DEPEND_ON_DEPRECATED_CLASS"));
     }
 }
