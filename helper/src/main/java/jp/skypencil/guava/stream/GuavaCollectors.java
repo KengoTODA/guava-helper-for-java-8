@@ -16,6 +16,8 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 
 public class GuavaCollectors {
+    private static final EnumSet<java.util.stream.Collector.Characteristics> EMPTY_CHARACTERISTICS = EnumSet.noneOf(java.util.stream.Collector.Characteristics.class);
+
     public static <T> Collector<T, ?, ImmutableList<T>> toImmutableList() {
         return new Collector<T, ImmutableList.Builder<T>, ImmutableList<T>>(){
 
@@ -41,7 +43,7 @@ public class GuavaCollectors {
 
             @Override
             public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EnumSet.noneOf(java.util.stream.Collector.Characteristics.class);
+                return EMPTY_CHARACTERISTICS;
             }
         };
     }
@@ -70,7 +72,7 @@ public class GuavaCollectors {
 
             @Override
             public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EnumSet.noneOf(java.util.stream.Collector.Characteristics.class);
+                return EMPTY_CHARACTERISTICS;
             }
         };
     }
@@ -124,7 +126,7 @@ public class GuavaCollectors {
 
             @Override
             public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EnumSet.noneOf(java.util.stream.Collector.Characteristics.class);
+                return EMPTY_CHARACTERISTICS;
             }
         };
     }
