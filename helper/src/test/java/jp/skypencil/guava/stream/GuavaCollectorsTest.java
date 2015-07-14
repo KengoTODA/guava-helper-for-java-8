@@ -40,4 +40,13 @@ public class GuavaCollectorsTest {
     public void testDuplicatedMapEntry() {
         Stream.of(1, 1).collect(GuavaCollectors.toImmutableMap(Object::toString, UnaryOperator.identity()));
     }
+
+    public void testDuplicatedMapEntryWithMergeFunction() {
+        ImmutableMap<String, Integer> map = Stream.of(1, 1).collect(
+                GuavaCollectors.toImmutableMap(Object::toString,
+                        UnaryOperator.identity(),
+                        (existing, newValue) -> existing));
+        Truth.assertThat(map).containsEntry("1", 1);
+        Truth.assertThat(map).hasSize(1);
+    }
 }
