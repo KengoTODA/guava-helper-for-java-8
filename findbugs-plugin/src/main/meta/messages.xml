@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MessageCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="messagecollection.xsd">
+
+  <Plugin>
+    <ShortDescription>FindBugs plugin for Guava migration</ShortDescription>
+    <Details>A findbugs plugin to migrate from Guava to Java8</Details>
+  </Plugin>
+
+  <Detector class="jp.skypencil.guava.DependencyOnDeprecatedGuavaClassDetector">
+    <Details>
+      Finds dependency on deprecated guava class
+    </Details>
+  </Detector>
+
+  <BugPattern type="GUAVA_DEPEND_ON_DEPRECATED_CLASS">
+    <ShortDescription>
+      Depends on deprecated guava class
+    </ShortDescription>
+    <LongDescription>
+      {0} should be replaced with {1} in Java8
+    </LongDescription>
+    <Details>
+<![CDATA[
+<p>Depends on deprecated guava class.</p>
+]]>
+    </Details>
+  </BugPattern>
+
+  <BugCode abbrev="GUAVA">GUAVA</BugCode>
+</MessageCollection>

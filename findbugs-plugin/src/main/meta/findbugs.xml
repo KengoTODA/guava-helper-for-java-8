@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindbugsPlugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="findbugsplugin.xsd" 
+        pluginid="jp.skypencil.guava"
+        provider="Kengo TODA" 
+        website="https://github.com/KengoTODA/guava-helper-for-java-8">
+
+        <Detector class="jp.skypencil.guava.DependencyOnDeprecatedGuavaClassDetector"
+          reports="GUAVA_DEPEND_ON_DEPRECATED_CLASS" speed="fast" />
+        <BugPattern type="GUAVA_DEPEND_ON_DEPRECATED_CLASS"
+          abbrev="GUAVA" category="BAD_PRACTICE" />
+
+</FindbugsPlugin>
