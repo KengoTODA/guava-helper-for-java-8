@@ -23,7 +23,7 @@ public class GuavaCollectors {
 
     private static final <T> BinaryOperator<T> throwingMerger() {
         return (value, another) -> {
-            throw new IllegalStateException(String.format("Duplicate key %s", value));
+            throw new IllegalStateException(String.format("Duplicated value %s", value));
         };
     };
 
