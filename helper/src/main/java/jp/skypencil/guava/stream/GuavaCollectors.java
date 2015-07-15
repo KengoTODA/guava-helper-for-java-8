@@ -17,8 +17,11 @@ import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableTable;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 
 public class GuavaCollectors {
@@ -348,5 +351,77 @@ public class GuavaCollectors {
             };
         }
     }
+
+    public static <T, K, U> Collector<T, ?, Multimap<K, U>> toMultimap(
+            Function<? super T, ? extends K> keyMapper,
+            Function<? super T, ? extends U> valueMapper) {
+        return new MultimapCollector<T, K, U, Multimap<K, U>>(keyMapper,
+                valueMapper) {
+            @Override
+            public Function<Multimap<K, U>, Multimap<K, U>> finisher() {
+                return Function.identity();
+            }
+
+            @Override
+            public Set<java.util.stream.Collector.Characteristics> characteristics() {
+                return EnumSet
+                        .of(java.util.stream.Collector.Characteristics.IDENTITY_FINISH);
+            }
+        };
+    }
+
+    public static <T, K, U> Collector<T, ?, ImmutableMultimap<K, U>> toImmutableMultimap(
+            Function<? super T, ? extends K> keyMapper,
+            Function<? super T, ? extends U> valueMapper) {
+        return new MultimapCollector<T, K, U, ImmutableMultimap<K, U>>(
+                keyMapper, valueMapper) {
+            @Override
+            public Function<Multimap<K, U>, ImmutableMultimap<K, U>> finisher() {
+                return (map) -> {
+                    ImmutableMultimap.Builder<K, U> builder = ImmutableMultimap
+                            .builder();
+                    return builder.putAll(map).build();
+                };
+            }
+
+            @Override
+            public Set<java.util.stream.Collector.Characteristics> characteristics() {
+                return EMPTY_CHARACTERISTICS;
+            }
+        };
+    }
+
+    private static abstract class MultimapCollector<T, K, U, R extends Multimap<K, U>>
+            implements Collector<T, Multimap<K, U>, R> {
+        private Function<? super T, ? extends K> keyMapper;
+        private Function<? super T, ? extends U> valueMapper;
+
+        MultimapCollector(Function<? super T, ? extends K> keyMapper,
+                Function<? super T, ? extends U> valueMapper) {
+            this.keyMapper = keyMapper;
+            this.valueMapper = valueMapper;
+        }
+
+        @Override
+        public Supplier<Multimap<K, U>> supplier() {
+            return LinkedListMultimap::create;
+        }
+
+        @Override
+        public BiConsumer<Multimap<K, U>, T> accumulator() {
+            return (map, data) -> {
+                map.put(keyMapper.apply(data), valueMapper.apply(data));
+            };
+        }
+
+        @Override
+        public BinaryOperator<Multimap<K, U>> combiner() {
+            return (map, another) -> {
+                map.putAll(another);
+                return map;
+            };
+        }
+    }
+
     // TODO groupingBy
 }
