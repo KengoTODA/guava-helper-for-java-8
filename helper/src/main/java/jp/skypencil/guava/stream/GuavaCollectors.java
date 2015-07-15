@@ -10,7 +10,10 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.HashBiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
@@ -253,5 +256,97 @@ public class GuavaCollectors {
             };
         }
     };
+
+    public static <T, K, U> Collector<T, ?, BiMap<K, U>> toBiMap(
+            Function<? super T, ? extends K> keyMapper,
+            Function<? super T, ? extends U> valueMapper) {
+        return toBiMap(keyMapper, valueMapper, throwingMerger());
+    }
+
+    public static <T, K, U> Collector<T, ?, BiMap<K, U>> toBiMap(
+            Function<? super T, ? extends K> keyMapper,
+            Function<? super T, ? extends U> valueMapper,
+            BinaryOperator<U> mergeFunction) {
+        return new BiMapCollector<T, K, U, BiMap<K, U>>(keyMapper, valueMapper,
+                mergeFunction) {
+            @Override
+            public Function<BiMap<K, U>, BiMap<K, U>> finisher() {
+                return Function.identity();
+            }
+
+            @Override
+            public Set<java.util.stream.Collector.Characteristics> characteristics() {
+                return EnumSet
+                        .of(java.util.stream.Collector.Characteristics.IDENTITY_FINISH);
+            }
+        };
+    }
+
+    public static <T, K, U> Collector<T, ?, ImmutableBiMap<K, U>> toImmutableBiMap(
+            Function<? super T, ? extends K> keyMapper,
+            Function<? super T, ? extends U> valueMapper) {
+        return toImmutableBiMap(keyMapper, valueMapper, throwingMerger());
+    }
+
+    public static <T, K, U> Collector<T, ?, ImmutableBiMap<K, U>> toImmutableBiMap(
+            Function<? super T, ? extends K> keyMapper,
+            Function<? super T, ? extends U> valueMapper,
+            BinaryOperator<U> mergeFunction) {
+        return new BiMapCollector<T, K, U, ImmutableBiMap<K, U>>(keyMapper,
+                valueMapper, mergeFunction) {
+            @Override
+            public Function<BiMap<K, U>, ImmutableBiMap<K, U>> finisher() {
+                return map -> {
+                    ImmutableBiMap.Builder<K, U> builder = ImmutableBiMap
+                            .builder();
+                    return builder.putAll(map).build();
+                };
+            }
+
+            @Override
+            public Set<java.util.stream.Collector.Characteristics> characteristics() {
+                return EMPTY_CHARACTERISTICS;
+            }
+        };
+    }
+
+    private static abstract class BiMapCollector<T, K, U, R extends BiMap<K, U>>
+            implements Collector<T, BiMap<K, U>, R> {
+        private final BinaryOperator<U> mergeFunction;
+        private final Function<? super T, ? extends U> valueMapper;
+        private final Function<? super T, ? extends K> keyMapper;
+
+        BiMapCollector(Function<? super T, ? extends K> keyMapper,
+                Function<? super T, ? extends U> valueMapper,
+                BinaryOperator<U> mergeFunction) {
+            this.keyMapper = keyMapper;
+            this.valueMapper = valueMapper;
+            this.mergeFunction = mergeFunction;
+        }
+
+        @Override
+        public Supplier<BiMap<K, U>> supplier() {
+            return HashBiMap::create;
+        }
+
+        @Override
+        public BiConsumer<BiMap<K, U>, T> accumulator() {
+            return (map, data) -> {
+                K key = keyMapper.apply(data);
+                U value = valueMapper.apply(data);
+                map.merge(key, value, mergeFunction);
+            };
+        }
+
+        @Override
+        public BinaryOperator<BiMap<K, U>> combiner() {
+            return (map, another) -> {
+                another.forEach((key, value) -> {
+                    map.merge(key, value, mergeFunction);
+                });
+                return map;
+            };
+        }
+    }
     // TODO groupingBy
 }

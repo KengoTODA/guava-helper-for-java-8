@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -102,5 +104,53 @@ public class GuavaCollectorsTest {
 
     private String generateColumn(Object object) {
         return "column";
+    }
+
+    @Test
+    public void testCollectToBiMap() {
+        BiMap<String, Integer> bimap = Stream.of(1, 2).collect(
+                GuavaCollectors.toBiMap(Object::toString, Function.identity()));
+        Truth.assertThat(bimap).hasSize(2);
+        Truth.assertThat(bimap).containsEntry("1", 1);
+        Truth.assertThat(bimap.inverse()).containsEntry(2, "2");
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testDuplicatedBiMapEntry() {
+        Stream.of(10, 10).collect(
+                GuavaCollectors.toBiMap(Object::toString, Function.identity()));
+    }
+
+    @Test
+    public void testDuplicatedBiMapEntryWithMergeFunction() {
+        BiMap<String, Integer> biMap = Stream.of(10, 10).collect(
+                GuavaCollectors.toBiMap(Object::toString, Function.identity(),
+                        (existing, newValue) -> existing));
+        Truth.assertThat(biMap).containsEntry("10", 10);
+        Truth.assertThat(biMap).hasSize(1);
+    }
+
+    @Test
+    public void testCollectToImmutableBiMap() {
+        ImmutableBiMap<String, Integer> bimap = Stream.of(1, 2).collect(
+                GuavaCollectors.toImmutableBiMap(Object::toString, Function.identity()));
+        Truth.assertThat(bimap).hasSize(2);
+        Truth.assertThat(bimap).containsEntry("1", 1);
+        Truth.assertThat(bimap.inverse()).containsEntry(2, "2");
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testDuplicatedImmutableBiMapEntry() {
+        Stream.of(10, 10).collect(
+                GuavaCollectors.toImmutableBiMap(Object::toString, Function.identity()));
+    }
+
+    @Test
+    public void testDuplicatedImmutableBiMapEntryWithMergeFunction() {
+        ImmutableBiMap<String, Integer> biMap = Stream.of(10, 10).collect(
+                GuavaCollectors.toImmutableBiMap(Object::toString, Function.identity(),
+                        (existing, newValue) -> existing));
+        Truth.assertThat(biMap).containsEntry("10", 10);
+        Truth.assertThat(biMap).hasSize(1);
     }
 }
