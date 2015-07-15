@@ -10,8 +10,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 
 import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.HashBiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
@@ -19,7 +17,6 @@ import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableTable;
-import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 
@@ -199,64 +196,6 @@ public class GuavaCollectors {
         };
     }
 
-    private static abstract class TableCollector<T, R, C, V, E> implements Collector<T, Table<R, C, V>, E> {
-        private final Function<? super T, ? extends R> rowMapper;
-        private final Function<? super T, ? extends C> columnMapper;
-        private final Function<? super T, ? extends V> valueMapper;
-        private final BinaryOperator<V> mergeFunction;
-
-        TableCollector(
-            Function<? super T, ? extends R> rowMapper,
-            Function<? super T, ? extends C> columnMapper,
-            Function<? super T, ? extends V> valueMapper,
-            BinaryOperator<V> mergeFunction) {
-            this.rowMapper = rowMapper;
-            this.columnMapper = columnMapper;
-            this.valueMapper = valueMapper;
-            this.mergeFunction = mergeFunction;
-        }
-
-        @Override
-        public Supplier<Table<R, C, V>> supplier() {
-            return HashBasedTable::create;
-        }
-
-        @Override
-        public BiConsumer<Table<R, C, V>, T> accumulator() {
-            return (table, data) -> {
-                R row = rowMapper.apply(data);
-                C column = columnMapper.apply(data);
-                V value = valueMapper.apply(data);
-
-                if (table.contains(row, column)) {
-                    V existing = table.get(row, column);
-                    table.put(row, column, mergeFunction.apply(existing, value));
-                } else {
-                    table.put(row, column, value);
-                }
-            };
-        }
-
-        @Override
-        public BinaryOperator<Table<R, C, V>> combiner() {
-            return (table, another) -> {
-                another.cellSet().forEach(cell -> {
-                    R row = cell.getRowKey();
-                    C column = cell.getColumnKey();
-                    V value = cell.getValue();
-
-                    if (table.contains(row, column)) {
-                        V existing = table.get(row, column);
-                        table.put(row, column, mergeFunction.apply(existing, value));
-                    } else {
-                        table.put(row, column, value);
-                    }
-                });
-                return table;
-            };
-        }
-    };
-
     public static <T, K, U> Collector<T, ?, BiMap<K, U>> toBiMap(
             Function<? super T, ? extends K> keyMapper,
             Function<? super T, ? extends U> valueMapper) {
@@ -309,45 +248,6 @@ public class GuavaCollectors {
         };
     }
 
-    private static abstract class BiMapCollector<T, K, U, R extends BiMap<K, U>>
-            implements Collector<T, BiMap<K, U>, R> {
-        private final BinaryOperator<U> mergeFunction;
-        private final Function<? super T, ? extends U> valueMapper;
-        private final Function<? super T, ? extends K> keyMapper;
-
-        BiMapCollector(Function<? super T, ? extends K> keyMapper,
-                Function<? super T, ? extends U> valueMapper,
-                BinaryOperator<U> mergeFunction) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-            this.mergeFunction = mergeFunction;
-        }
-
-        @Override
-        public Supplier<BiMap<K, U>> supplier() {
-            return HashBiMap::create;
-        }
-
-        @Override
-        public BiConsumer<BiMap<K, U>, T> accumulator() {
-            return (map, data) -> {
-                K key = keyMapper.apply(data);
-                U value = valueMapper.apply(data);
-                map.merge(key, value, mergeFunction);
-            };
-        }
-
-        @Override
-        public BinaryOperator<BiMap<K, U>> combiner() {
-            return (map, another) -> {
-                another.forEach((key, value) -> {
-                    map.merge(key, value, mergeFunction);
-                });
-                return map;
-            };
-        }
-    }
-
     public static <T, K, U> Collector<T, ?, Multimap<K, U>> toMultimap(
             Function<? super T, ? extends K> keyMapper,
             Function<? super T, ? extends U> valueMapper) {
@@ -384,38 +284,6 @@ public class GuavaCollectors {
                 return CharacteristicSets.EMPTY;
             }
         };
-    }
-
-    private static abstract class MultimapCollector<T, K, U, R extends Multimap<K, U>>
-            implements Collector<T, Multimap<K, U>, R> {
-        private Function<? super T, ? extends K> keyMapper;
-        private Function<? super T, ? extends U> valueMapper;
-
-        MultimapCollector(Function<? super T, ? extends K> keyMapper,
-                Function<? super T, ? extends U> valueMapper) {
-            this.keyMapper = keyMapper;
-            this.valueMapper = valueMapper;
-        }
-
-        @Override
-        public Supplier<Multimap<K, U>> supplier() {
-            return LinkedListMultimap::create;
-        }
-
-        @Override
-        public BiConsumer<Multimap<K, U>, T> accumulator() {
-            return (map, data) -> {
-                map.put(keyMapper.apply(data), valueMapper.apply(data));
-            };
-        }
-
-        @Override
-        public BinaryOperator<Multimap<K, U>> combiner() {
-            return (map, another) -> {
-                map.putAll(another);
-                return map;
-            };
-        }
     }
 
     // TODO groupingBy
