@@ -15,9 +15,11 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Table;
 
 public class GuavaCollectors {
@@ -276,6 +278,37 @@ public class GuavaCollectors {
                     ImmutableMultimap.Builder<K, U> builder = ImmutableMultimap
                             .builder();
                     return builder.putAll(map).build();
+                };
+            }
+
+            @Override
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.EMPTY;
+            }
+        };
+    }
+
+    public static <T> Collector<T, ?, Multiset<T>> toMultiset() {
+        return new MultisetCollector<T, Multiset<T>>() {
+            @Override
+            public Function<Multiset<T>, Multiset<T>> finisher() {
+                return Function.identity();
+            }
+
+            @Override
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.IDENTITY;
+            }
+        };
+    }
+
+    public static <T> Collector<T, ?, ImmutableMultiset<T>> toImmutableMultiset() {
+        return new MultisetCollector<T, ImmutableMultiset<T>>() {
+            @Override
+            public Function<Multiset<T>, ImmutableMultiset<T>> finisher() {
+                return (set) -> {
+                    ImmutableMultiset.Builder<T> builder = ImmutableMultiset.builder();
+                    return builder.addAll(set).build();
                 };
             }
 

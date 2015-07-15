@@ -11,9 +11,11 @@ import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMultimap;
+import com.google.common.collect.ImmutableMultiset;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableTable;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Multiset;
 import com.google.common.collect.Table;
 import com.google.common.truth.Truth;
 
@@ -157,7 +159,7 @@ public class GuavaCollectorsTest {
     }
 
     @Test
-    public void testCollectToMultiap() {
+    public void testCollectToMultimap() {
         Multimap<String, Integer> multimap = Stream.of(1, 2).collect(
                 GuavaCollectors.toMultimap(Object::toString, Function.identity()));
         Truth.assertThat(multimap).hasSize(2);
@@ -166,7 +168,7 @@ public class GuavaCollectorsTest {
     }
 
     @Test
-    public void testDuplicatedMultiapEntry() {
+    public void testDuplicatedMultimapEntry() {
         Multimap<String, Integer> multimap = Stream.of(10, 10).collect(
                 GuavaCollectors.toMultimap(Object::toString, Function.identity()));
         Truth.assertThat(multimap).hasSize(2);
@@ -188,5 +190,39 @@ public class GuavaCollectorsTest {
                 GuavaCollectors.toImmutableMultimap(Object::toString, Function.identity()));
         Truth.assertThat(multimap).hasSize(2);
         Truth.assertThat(multimap.get("10")).hasSize(2);
+    }
+
+    @Test
+    public void testCollectToMultiset() {
+        Multiset<String> multiset = Stream.of(1, 2).map(Object::toString).collect(
+                GuavaCollectors.toMultiset());
+        Truth.assertThat(multiset).hasSize(2);
+        Truth.assertThat(multiset).contains("1");
+        Truth.assertThat(multiset).contains("2");
+    }
+
+    @Test
+    public void testDuplicatedMultisetEntry() {
+        Multiset<String> multiset = Stream.of(10, 10).map(Object::toString).collect(
+                GuavaCollectors.toMultiset());
+        Truth.assertThat(multiset).hasSize(2);
+        Truth.assertThat(multiset.count("10")).isEqualTo(2);
+    }
+
+    @Test
+    public void testCollectToImmutableMultiset() {
+        ImmutableMultiset<String> multiset = Stream.of(1, 2).map(Object::toString).collect(
+                GuavaCollectors.toImmutableMultiset());
+        Truth.assertThat(multiset).hasSize(2);
+        Truth.assertThat(multiset).contains("1");
+        Truth.assertThat(multiset).contains("2");
+    }
+
+    @Test
+    public void testDuplicatedImmutableMultisetEntry() {
+        ImmutableMultiset<String> multiset = Stream.of(10, 10).map(Object::toString).collect(
+                GuavaCollectors.toImmutableMultiset());
+        Truth.assertThat(multiset).hasSize(2);
+        Truth.assertThat(multiset.count("10")).isEqualTo(2);
     }
 }
