@@ -1,6 +1,5 @@
 package jp.skypencil.guava.stream;
 
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -25,8 +24,6 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 
 public class GuavaCollectors {
-    private static final EnumSet<java.util.stream.Collector.Characteristics> EMPTY_CHARACTERISTICS = EnumSet.noneOf(java.util.stream.Collector.Characteristics.class);
-
     private static final <T> BinaryOperator<T> throwingMerger() {
         return (value, another) -> {
             throw new IllegalStateException(String.format("Duplicated value %s", value));
@@ -57,8 +54,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EMPTY_CHARACTERISTICS;
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.EMPTY;
             }
         };
     }
@@ -86,8 +83,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EMPTY_CHARACTERISTICS;
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.EMPTY;
             }
         };
     }
@@ -137,8 +134,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EMPTY_CHARACTERISTICS;
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.EMPTY;
             }
         };
     }
@@ -165,8 +162,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EnumSet.of(java.util.stream.Collector.Characteristics.IDENTITY_FINISH);
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.IDENTITY;
             }
         };
     }
@@ -196,8 +193,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EMPTY_CHARACTERISTICS;
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.EMPTY;
             }
         };
     }
@@ -278,9 +275,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EnumSet
-                        .of(java.util.stream.Collector.Characteristics.IDENTITY_FINISH);
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.IDENTITY;
             }
         };
     }
@@ -307,8 +303,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EMPTY_CHARACTERISTICS;
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.EMPTY;
             }
         };
     }
@@ -363,9 +359,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EnumSet
-                        .of(java.util.stream.Collector.Characteristics.IDENTITY_FINISH);
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.IDENTITY;
             }
         };
     }
@@ -385,8 +380,8 @@ public class GuavaCollectors {
             }
 
             @Override
-            public Set<java.util.stream.Collector.Characteristics> characteristics() {
-                return EMPTY_CHARACTERISTICS;
+            public Set<Characteristics> characteristics() {
+                return CharacteristicSets.EMPTY;
             }
         };
     }
