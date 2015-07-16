@@ -15,7 +15,7 @@ To use this module in your Maven project, please add following configuration to 
 <dependency>
   <groupId>jp.skypencil.guava</groupId>
   <artifactId>helper</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -38,7 +38,7 @@ To use this module in your Maven project, please add following configuration to 
       <plugin>
         <groupId>jp.skypencil.guava</groupId>
         <artifactId>findbugs-plugin</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
       </plugin>
     </plugins>
   </configuration>
