@@ -22,7 +22,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
 import com.google.common.collect.Table;
 
-public class GuavaCollectors {
+public final class GuavaCollectors {
     private static final <T> BinaryOperator<T> throwingMerger() {
         return (value, another) -> {
             throw new IllegalStateException(String.format("Duplicated value %s", value));
