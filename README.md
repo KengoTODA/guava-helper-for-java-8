@@ -4,22 +4,13 @@ A tool set to help developer to use Guava with Java 8
 [![Travis CI Build Status](https://travis-ci.org/KengoTODA/guava-helper-for-java-8.svg)](https://travis-ci.org/KengoTODA/guava-helper-for-java-8)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/5822/badge.svg)](https://scan.coverity.com/projects/5822)
 
-Helper module
--------------
+Guava was great library for Java 7 users. But now we have Java 8 and it has many useful features like `Optional`, `Stream` and `Lambda`. So some features in Guava should be replaced with them.
 
-Helper module provides collectors which is useful to use Guava with Java 8.  
-See [GuavaCollectors.java](helper/src/main/java/jp/skypencil/guava/stream/GuavaCollectors.java) and [its test cases](helper/src/test/java/jp/skypencil/guava/stream/GuavaCollectorsTest.java) for detail.
+Other parts in Guava are useful even for Java 8, especially collections. But Guava is designed for Java 6+, so it does not provide `java.util.stream.Collector` for Guava collections. So when you want to collect stream to Guava collections, you need some hack which makes your code nonintuitive.
 
-To use this module in your Maven project, please add following configuration to your `pom.xml`.
+This toolset solves these two problems. For former problem, this toolset provides FindBugs plugin which reports dependency on deprecated Guava classes. For latter problem, this toolset provides `GuavaCollectors` class which provides many `java.util.stream.Collector` instances for Guava collections.
 
-```xml
-<dependency>
-  <groupId>jp.skypencil.guava</groupId>
-  <artifactId>helper</artifactId>
-  <version>1.0.1</version>
-</dependency>
-```
-
+This toolset will help your development with Java 8 and good parts of Guava library.
 
 Findbugs plugin
 ---------------
@@ -44,6 +35,22 @@ To use this module in your Maven project, please add following configuration to 
     </plugins>
   </configuration>
 </plugin>
+```
+
+Helper module
+-------------
+
+Helper module provides collectors which is useful to use Guava with Java 8.  
+See [GuavaCollectors.java](helper/src/main/java/jp/skypencil/guava/stream/GuavaCollectors.java) and [its test cases](helper/src/test/java/jp/skypencil/guava/stream/GuavaCollectorsTest.java) for detail.
+
+To use this module in your Maven project, please add following configuration to your `pom.xml`.
+
+```xml
+<dependency>
+  <groupId>jp.skypencil.guava</groupId>
+  <artifactId>helper</artifactId>
+  <version>1.0.1</version>
+</dependency>
 ```
 
 Change set
