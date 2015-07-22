@@ -20,4 +20,4 @@ addons:
     notification_email: skypencil+github@gmail.com
     build_command_prepend: "mvn clean"
     build_command:   "mvn install"
-    branch_pattern: coverity_scan
+    branch_pattern: master
