@@ -1,7 +1,8 @@
 A tool set to help developer to use Guava with Java 8
 =====================================================
 
-[![Build Status](https://travis-ci.org/KengoTODA/guava-helper-for-java-8.svg)](https://travis-ci.org/KengoTODA/guava-helper-for-java-8)
+[![Travis CI Build Status](https://travis-ci.org/KengoTODA/guava-helper-for-java-8.svg)](https://travis-ci.org/KengoTODA/guava-helper-for-java-8)
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/5822/badge.svg)](https://scan.coverity.com/projects/5822)
 
 Helper module
 -------------
