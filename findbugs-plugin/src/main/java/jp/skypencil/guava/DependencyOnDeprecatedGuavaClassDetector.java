@@ -24,6 +24,7 @@ public class DependencyOnDeprecatedGuavaClassDetector extends BytecodeScanningDe
 
     private Map<String, String> listUpTarget() {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
+        builder.put("com/google/common/io/BaseEncoding", "java/util/Base64");
         builder.put("com/google/common/base/Optional", "java/util/Optional");
         builder.put("com/google/common/base/Joiner", "java/util/StringJoiner");
         builder.put("com/google/common/base/Predicate", "java/util/function/Predicate");
