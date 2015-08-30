@@ -41,8 +41,13 @@ Helper module
 -------------
 
 Helper module provides collectors which is useful to use Guava with Java 8.  
-See [GuavaCollectors.java](helper/src/main/java/jp/skypencil/guava/stream/GuavaCollectors.java) and [its test cases](helper/src/test/java/jp/skypencil/guava/stream/GuavaCollectorsTest.java) for detail.
 
+```java
+ImmutableMap<String, Integer> map = Stream.of(1, 2)
+        .collect(GuavaCollectors.toImmutableMap(Object::toString, UnaryOperator.identity()));
+```
+
+See [GuavaCollectors.java](helper/src/main/java/jp/skypencil/guava/stream/GuavaCollectors.java) and [its test cases](helper/src/test/java/jp/skypencil/guava/stream/GuavaCollectorsTest.java) for detail usage.
 To use this module in your Maven project, please add following configuration to your `pom.xml`.
 
 ```xml
