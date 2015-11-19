@@ -31,7 +31,7 @@ public class DependencyOnDeprecatedGuavaClassDetector extends BytecodeScanningDe
         builder.put("com/google/common/base/Function", "java/util/function/Function");
         builder.put("com/google/common/base/Supplier", "java/util/function/Supplier");
         builder.put("com/google/common/collect/FluentIterable", "java/util/stream/Stream");
-        builder.put("com/google/common/concurrent/SettableFuture", "java/util/concurrent/CompletableFuture");
+        builder.put("com/google/common/util/concurrent/SettableFuture", "java/util/concurrent/CompletableFuture");
         return builder.build();
     }
 
