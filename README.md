@@ -66,7 +66,7 @@ Please visit [release page](https://github.com/KengoTODA/guava-helper-for-java-8
 Copyright and license
 ---------------------
 
-    Copyright 2015 Kengo TODA
+    Copyright 2015-2016 Kengo TODA
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
