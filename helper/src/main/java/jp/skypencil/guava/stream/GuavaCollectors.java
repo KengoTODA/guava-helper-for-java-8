@@ -29,6 +29,10 @@ public final class GuavaCollectors {
         };
     };
 
+    /**
+     * @deprecated Use {@link ImmutableList#toImmutableList()} instead.
+     */
+    @Deprecated
     public static <T> Collector<T, ?, ImmutableList<T>> toImmutableList() {
         return new Collector<T, ImmutableList.Builder<T>, ImmutableList<T>>(){
 
@@ -59,6 +63,10 @@ public final class GuavaCollectors {
         };
     }
 
+    /**
+     * @deprecated Use {@link ImmutableSet#toImmutableSet()} instead.
+     */
+    @Deprecated
     public static <T> Collector<T, ?, ImmutableSet<T>> toImmutableSet() {
         return new Collector<T, ImmutableSet.Builder<T>, ImmutableSet<T>>(){
             @Override
@@ -88,12 +96,20 @@ public final class GuavaCollectors {
         };
     }
 
+    /**
+     * @deprecated Use {@link ImmutableMap#toImmutableMap(Function, Function)} instead.
+     */
+    @Deprecated
     public static <T, K, U> Collector<T, ?, ImmutableMap<K, U>> toImmutableMap(
             Function<? super T, ? extends K> keyMapper,
             Function<? super T, ? extends U> valueMapper) {
         return toImmutableMap(keyMapper, valueMapper, throwingMerger());
     }
 
+    /**
+     * @deprecated Use {@link ImmutableMap#toImmutableMap(Function, Function, BinaryOperator)} instead.
+     */
+    @Deprecated
     public static <T, K, U> Collector<T, ?, ImmutableMap<K, U>> toImmutableMap(
             Function<? super T, ? extends K> keyMapper,
             Function<? super T, ? extends U> valueMapper,
@@ -167,6 +183,10 @@ public final class GuavaCollectors {
         };
     }
 
+    /**
+     * @deprecated Use {@link ImmutableTable#toImmutableTable(Function, Function, Function)} instead.
+     */
+    @Deprecated
     public static <T,R,C,V> Collector<T, ?, ImmutableTable<R, C, V>> toImmutableTable(
             Function<? super T, ? extends R> rowMapper,
             Function<? super T, ? extends C> columnMapper,
@@ -174,6 +194,10 @@ public final class GuavaCollectors {
         return toImmutableTable(rowMapper, columnMapper, valueMapper, throwingMerger());
     }
 
+    /**
+     * @deprecated Use {@link ImmutableTable#toImmutableTable(Function, Function, Function, BinaryOperator)} instead.
+     */
+    @Deprecated
     public static <T,R,C,V> Collector<T, ?, ImmutableTable<R, C, V>> toImmutableTable(
             Function<? super T, ? extends R> rowMapper,
             Function<? super T, ? extends C> columnMapper,
@@ -222,6 +246,10 @@ public final class GuavaCollectors {
         };
     }
 
+    /**
+     * @deprecated Use {@link ImmutableBiMap#toImmutableBiMap(Function, Function)} instead.
+     */
+    @Deprecated
     public static <T, K, U> Collector<T, ?, ImmutableBiMap<K, U>> toImmutableBiMap(
             Function<? super T, ? extends K> keyMapper,
             Function<? super T, ? extends U> valueMapper) {
@@ -302,6 +330,10 @@ public final class GuavaCollectors {
         };
     }
 
+    /**
+     * @deprecated Use {@link ImmutableMultiset#toImmutableMultiset()} instead.
+     */
+    @Deprecated
     public static <T> Collector<T, ?, ImmutableMultiset<T>> toImmutableMultiset() {
         return new MultisetCollector<T, ImmutableMultiset<T>>() {
             @Override
