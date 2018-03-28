@@ -2,6 +2,7 @@ A tool set to help developer to use Guava with Java 8
 =====================================================
 
 [![Travis CI Build Status](https://travis-ci.org/KengoTODA/guava-helper-for-java-8.svg)](https://travis-ci.org/KengoTODA/guava-helper-for-java-8)
+[![Javadocs](http://javadoc.io/badge/jp.skypencil.guava/helper.svg)](http://javadoc.io/doc/jp.skypencil.guava/helper)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/5822/badge.svg)](https://scan.coverity.com/projects/5822)
 
 Guava was great library for Java 7 users. But now we have Java 8 and it has many useful features like `Optional`, `Stream` and `Lambda`. So some features in Guava should be replaced with them.
