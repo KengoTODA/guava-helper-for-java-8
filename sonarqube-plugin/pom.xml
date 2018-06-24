@@ -44,6 +44,27 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>3.1.5</version>
+        <configuration>
+          <plugins>
+            <plugin>
+              <groupId>jp.skypencil.guava</groupId>
+              <artifactId>spotbugs-plugin</artifactId>
+              <version>${project.version}</version>
+            </plugin>
+          </plugins>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <dependencies>
