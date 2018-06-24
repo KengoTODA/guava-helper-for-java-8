@@ -3,23 +3,13 @@ dist: trusty
 language: java
 jdk:
   - oraclejdk8
-script: "mvn clean install"
+script: "mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar"
 notifications:
   email:
     recipients:
       - skypencil+travis@gmail.com
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "PBybpLDH9zbjf+fROMFMv/SqSkjPJYhoacHrg171yAjlTdjA9e4k8jf0yuXkmzM57jqLB27fMp4Xdvn76wbLhbowwmum35u6tH9OB79svfxNJ++aOQcacRXuWJLBZHR5opaoQ5w6pZQ9R8w1WSRp4Gz4+lRI1zeNQ+b6wMRBqfDzXmsFBh64MaIzNlKHmdX3oEeWesHGtnk7ISnGT/SFWTmgTb3SE3LGoIdCEeH7DKSiwzsaTLXtpSd6j+iji0BumlN1ZFzpwb2qHCK9wx1+z9IiImcPLt3tUF8ZOP2f3H7Y68RLoOfFUfvoo/0u2POOp1Iw2hY1dBLWSnVQcRiHljt19peXec3tjsU7fBRH2nbQjw+r8/YEPO5apuGqLKP93BIzNs1xFZ+x05rbA4BFp6nV5vO0J7UYL0Et0ENWGU8jVQPx0DX+KMljP8VDBldv2lMObSdBUJ/ME9XXGgpqVczozP1IXh8HJ0zPcfPgKR+a735cD4YRhIzC0fl5f8IrNbd2nerYqTv+2dIwe7JelMkauSIkdpjnNLOr57vhfrnMYLugRhr5kvpIMzLcMK92Hg+aLAV+mSYXjBIJLRiKhN4OlPkEO8Si3oZ2NbEwEggrs52utsYDXY2Zut4q4RVewJYBq8ADNr+4qDpCMd8oZBE3Cr0zeN1gL3N9kBnolcE="
-
 addons:
-  coverity_scan:
-    project:
-      name: "KengoTODA/guava-helper-for-java-8"
-      description: "A tool set to help developer to use Guava with Java 8"
-    notification_email: skypencil+github@gmail.com
-    build_command_prepend: "mvn clean"
-    build_command:   "mvn install"
-    branch_pattern: master
+  sonarcloud:
+    organization: "kengotoda-github"
+    token:
+      secure: "cJr8pKjm834HTREIFc/Vl67YXV4gT22qugKb8Kez+V1d9fCOe2TcKnNUH+GXJsCoLOa+1mI5uYtlX/rX4KAmoK25jhI08keq5FeRPfezZw7AhLqoJuPGAjKLDLYj25B4SUPlvIR1yxhAD7ds+cowRhHDnjrKmeHVZqwZm5jzzcMWG2mWSvNArMRBy0R9kbBXTZFxV+xKhcfv1Q2x6ZnmGS1kBIELKy0l6IAWeOPX09q2OIBPHS4HK0DMk0TEIXmVysmRNtvURkrDOOvz4NmPRbUpRCR2JUGT9ANcVi8cnsCsQmboIOC0LdlwvfJICfRzubZOv0GPQtTlLjIq0076/jUug9G3mWdPhhdxNFcDmaufZx38cff15fmHytayTpAgffqbMF8FWg0uDfbHwii8RBZH9Guea/iUD8GW1L1/rW2wowJaKFbCzDBJLwN0BLd1Tb+q6WfCNHA+mub6UxIcqgukOsqxIUR0G0GaxWGu89ystgtAmaOLKktxWvYyup9I/UcXS0wIuRcOkyQ0pxxSw6WabyLV9iD4qp169mNiPH5f8WUL5WtQoHfx8+FL1/bnXcrxag3QPrNB3hmyEKo46V7nzi3HphjrzrhysxjPUqD/jTaqQUMP2WM4m9wYlkxx+v0MZ0ihNdXauf9i+sd1oM2dohJUzUxKEjjrh0GZL8c="
