@@ -5,7 +5,7 @@
     <artifactId>guava-helper-for-java-8</artifactId>
     <version>1.0.2-SNAPSHOT</version>
   </parent>
-  <artifactId>sonarqube-plugin</artifactId>
+  <artifactId>guava-helper-sonarqube-plugin</artifactId>
   <name>Guava helper for Java8 SonarQube plugin</name>
   <packaging>sonar-plugin</packaging>
   <build>
