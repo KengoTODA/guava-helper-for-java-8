@@ -5,6 +5,7 @@ import java.util.Map;
 import org.apache.bcel.classfile.Field;
 import org.apache.bcel.classfile.Method;
 import org.apache.bcel.generic.Type;
+import org.apache.bcel.Const;
 
 import com.google.common.collect.ImmutableMap;
 
@@ -37,8 +38,8 @@ public class DependencyOnDeprecatedGuavaClassDetector extends BytecodeScanningDe
 
     @Override
     public boolean beforeOpcode(int seen) {
-        if ((seen == INVOKESPECIAL) || (seen == INVOKESTATIC)
-                || (seen == INVOKEVIRTUAL) || (seen == INVOKEDYNAMIC)) {
+        if ((seen == Const.INVOKESPECIAL) || (seen == Const.INVOKESTATIC)
+                || (seen == Const.INVOKEVIRTUAL) || (seen == Const.INVOKEDYNAMIC)) {
             @SlashedClassName
             String referenced = getClassConstantOperand();
             @SlashedClassName
