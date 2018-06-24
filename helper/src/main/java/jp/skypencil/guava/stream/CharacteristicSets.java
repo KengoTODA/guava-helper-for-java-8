@@ -9,4 +9,6 @@ final class CharacteristicSets {
 
     static final EnumSet<Characteristics> IDENTITY = EnumSet
             .of(Characteristics.IDENTITY_FINISH);
+
+    private CharacteristicSets() {}
 }

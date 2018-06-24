@@ -27,7 +27,7 @@ public final class GuavaCollectors {
         return (value, another) -> {
             throw new IllegalStateException(String.format("Duplicated value %s", value));
         };
-    };
+    }
 
     /**
      * @deprecated Use {@link ImmutableList#toImmutableList()} instead.
@@ -133,16 +133,16 @@ public final class GuavaCollectors {
             @Override
             public BinaryOperator<Map<K, U>> combiner() {
                 return (map, another) -> {
-                    another.forEach((key, value) -> {
-                        map.merge(key, value, mergeFunction);
-                    });
+                    another.forEach((key, value) ->
+                        map.merge(key, value, mergeFunction)
+                    );
                     return map;
                 };
             }
 
             @Override
             public Function<Map<K, U>, ImmutableMap<K, U>> finisher() {
-                return (map) -> {
+                return map -> {
                     ImmutableMap.Builder<K, U> builder = ImmutableMap.builder();
                     return builder.putAll(map).build();
                 };
@@ -208,7 +208,7 @@ public final class GuavaCollectors {
                 rowMapper, columnMapper, valueMapper, mergeFunction) {
             @Override
             public Function<Table<R, C, V>, ImmutableTable<R, C, V>> finisher() {
-                return (table) -> {
+                return table -> {
                     ImmutableTable.Builder<R, C, V> builder = ImmutableTable
                             .builder();
                     return builder.putAll(table).build();
@@ -302,7 +302,7 @@ public final class GuavaCollectors {
                 keyMapper, valueMapper) {
             @Override
             public Function<Multimap<K, U>, ImmutableMultimap<K, U>> finisher() {
-                return (map) -> {
+                return map -> {
                     ImmutableMultimap.Builder<K, U> builder = ImmutableMultimap
                             .builder();
                     return builder.putAll(map).build();
@@ -338,7 +338,7 @@ public final class GuavaCollectors {
         return new MultisetCollector<T, ImmutableMultiset<T>>() {
             @Override
             public Function<Multiset<T>, ImmutableMultiset<T>> finisher() {
-                return (set) -> {
+                return set -> {
                     ImmutableMultiset.Builder<T> builder = ImmutableMultiset.builder();
                     return builder.addAll(set).build();
                 };
@@ -351,5 +351,6 @@ public final class GuavaCollectors {
         };
     }
 
+    private GuavaCollectors() {}
     // TODO groupingBy
 }
