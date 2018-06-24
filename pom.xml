@@ -7,6 +7,7 @@
   <description>A tool set to help developer to use Guava with Java 8</description>
   <packaging>pom</packaging>
   <modules>
+    <module>sonarqube-plugin</module>
     <module>spotbugs-plugin</module>
     <module>helper</module>
   </modules>
@@ -64,6 +65,12 @@
         <groupId>com.google.guava</groupId>
         <artifactId>guava</artifactId>
         <version>21.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs</artifactId>
+        <version>3.1.5</version>
+        <scope>provided</scope>
       </dependency>
       <dependency>
         <groupId>com.google.truth</groupId>
