@@ -25,17 +25,16 @@
       <artifactId>mockito-all</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.bcel</groupId>
-      <artifactId>bcel</artifactId>
-      <version>6.2</version>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>test-harness</artifactId>
+      <scope>test</scope>
+      <version>3.1.5</version>
     </dependency>
     <dependency>
-      <groupId>com.google.code.findbugs</groupId>
-      <artifactId>findbugs</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.youdevise</groupId>
-      <artifactId>test-driven-detectors4findbugs</artifactId>
+      <groupId>com.github.spotbugs</groupId>
+      <artifactId>spotbugs</artifactId>
+      <scope>provided</scope>
+      <version>3.1.5</version>
     </dependency>
   </dependencies>
   <build>
@@ -56,7 +55,7 @@
         <artifactId>maven-resources-plugin</artifactId>
         <executions>
           <execution>
-            <phase>prepare-package</phase>
+            <phase>process-test-resources</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
