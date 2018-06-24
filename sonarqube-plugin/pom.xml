@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>jp.skypencil.guava</groupId>
+    <artifactId>guava-helper-for-java-8</artifactId>
+    <version>1.0.2-SNAPSHOT</version>
+  </parent>
+  <artifactId>sonarqube-plugin</artifactId>
+  <name>Guava helper for Java8 SonarQube plugin</name>
+  <packaging>sonar-plugin</packaging>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+        <artifactId>sonar-packaging-maven-plugin</artifactId>
+        <version>1.18.0.372</version>
+        <extensions>true</extensions>
+        <configuration>
+          <pluginName>GuavaHelper</pluginName>
+          <pluginDescription><![CDATA[Support migration from Guava to Java8]]></pluginDescription>
+          <pluginClass>jp.skypencil.guava.SonarQubePlugin</pluginClass>
+          <useChildFirstClassLoader>false</useChildFirstClassLoader>
+          <requirePlugins>findbugs:3.5</requirePlugins><!-- the version introduced SpotBugs 3.1 -->
+          <pluginUrl>https://github.com/KengoTODA/guava-helper-for-java-8</pluginUrl>
+          <pluginSourcesUrl>https://github.com/KengoTODA/guava-helper-for-java-8</pluginSourcesUrl>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>jp.skypencil.sonarqube</groupId>
+        <artifactId>rule-xml-maven-plugin</artifactId>
+        <version>0.1.1</version>
+        <configuration>
+          <findbugs>../spotbugs-plugin/src/main/resources/findbugs.xml</findbugs>
+          <messages>../spotbugs-plugin/src/main/resources/messages.xml</messages>
+          <output>${project.build.outputDirectory}/jp/skypencil/guava/rules.xml</output>
+          <tags>guava</tags>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+  <dependencies>
+    <dependency>
+      <groupId>jp.skypencil.guava</groupId>
+      <artifactId>spotbugs-plugin</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.sonarsource.sonarqube</groupId>
+      <artifactId>sonar-plugin-api</artifactId>
+      <version>5.6.6</version><!-- LTS release -->
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+</project>
