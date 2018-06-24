@@ -5,8 +5,8 @@
     <artifactId>guava-helper-for-java-8</artifactId>
     <version>1.0.2-SNAPSHOT</version>
   </parent>
-  <artifactId>findbugs-plugin</artifactId>
-  <description>A findbugs plugin to migrate from Guava to Java8</description>
+  <artifactId>spotbugs-plugin</artifactId>
+  <description>A spotbugs plugin to migrate from Guava to Java8</description>
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
