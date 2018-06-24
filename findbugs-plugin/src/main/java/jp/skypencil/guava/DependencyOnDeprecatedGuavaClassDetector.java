@@ -89,6 +89,7 @@ public class DependencyOnDeprecatedGuavaClassDetector extends BytecodeScanningDe
             bug.addClassAndMethod(this);
         } else if (this.visitingField()) {
             bug.addField(this);
+            bug.addClass(this);
         }
 
         bugReporter.reportBug(bug);
