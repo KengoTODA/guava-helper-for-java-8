@@ -27,9 +27,9 @@ abstract class MultimapCollector<T, K, U, R extends Multimap<K, U>>
 
     @Override
     public BiConsumer<Multimap<K, U>, T> accumulator() {
-        return (map, data) -> {
-            map.put(keyMapper.apply(data), valueMapper.apply(data));
-        };
+        return (map, data) ->
+            map.put(keyMapper.apply(data), valueMapper.apply(data))
+        ;
     }
 
     @Override

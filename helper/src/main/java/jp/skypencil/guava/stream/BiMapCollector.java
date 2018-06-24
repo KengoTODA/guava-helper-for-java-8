@@ -40,9 +40,9 @@ abstract class BiMapCollector<T, K, U, R extends BiMap<K, U>>
     @Override
     public BinaryOperator<BiMap<K, U>> combiner() {
         return (map, another) -> {
-            another.forEach((key, value) -> {
-                map.merge(key, value, mergeFunction);
-            });
+            another.forEach((key, value) ->
+                map.merge(key, value, mergeFunction)
+            );
             return map;
         };
     }
