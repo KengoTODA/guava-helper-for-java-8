@@ -1,6 +1,6 @@
 package jp.skypencil.guava;
 
-import org.sonar.api.resources.Java;
+import org.sonar.plugins.java.Java;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
