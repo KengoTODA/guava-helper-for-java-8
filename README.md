@@ -9,29 +9,29 @@ Guava was great library for Java 7 users. But now we have Java 8 and it has many
 
 Other parts in Guava are useful even for Java 8, especially collections. But Guava is designed for Java 6+, so it does not provide `java.util.stream.Collector` for Guava collections. So when you want to collect stream to Guava collections, you need some hack which makes your code nonintuitive.
 
-This toolset solves these two problems. For former problem, this toolset provides FindBugs plugin which reports dependency on deprecated Guava classes. For latter problem, this toolset provides `GuavaCollectors` class which provides many `java.util.stream.Collector` instances for Guava collections.
+This toolset solves these two problems. For former problem, this toolset provides SpotBugs plugin which reports dependency on deprecated Guava classes. For latter problem, this toolset provides `GuavaCollectors` class which provides many `java.util.stream.Collector` instances for Guava collections.
 
 This toolset will help your development with Java 8 and good parts of Guava library.
 
-Findbugs plugin
+SpotBugs plugin
 ---------------
 
-Findbugs plugin helps developer to find dependency on deprecated guava classes, which should be replaced with Java 8.
-List of deprecated guava classes is in [DependencyOnDeprecatedGuavaClassDetector.java](findbugs-plugin/src/main/java/jp/skypencil/guava/DependencyOnDeprecatedGuavaClassDetector.java).
+SpotBugs plugin helps developer to find dependency on deprecated guava classes, which should be replaced with Java 8.
+List of deprecated guava classes is in [DependencyOnDeprecatedGuavaClassDetector.java](spotbugs-plugin/src/main/java/jp/skypencil/guava/DependencyOnDeprecatedGuavaClassDetector.java).
 
 To use this module in your Maven project, please add following configuration to your `pom.xml`.
 
 ```xml
 <plugin>
-  <groupId>org.codehaus.mojo</groupId>
-  <artifactId>findbugs-maven-plugin</artifactId>
-  <version>3.0.1</version>
+  <groupId>com.github.spotbugs</groupId>
+  <artifactId>spotbugs-maven-plugin</artifactId>
+  <version>3.1.5</version>
   <configuration>
     <plugins>
       <plugin>
         <groupId>jp.skypencil.guava</groupId>
-        <artifactId>findbugs-plugin</artifactId>
-        <version>1.0.1</version>
+        <artifactId>spotbugs-plugin</artifactId>
+        <version>1.0.2</version>
       </plugin>
     </plugins>
   </configuration>
