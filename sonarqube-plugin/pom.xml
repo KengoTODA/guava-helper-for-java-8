@@ -85,7 +85,7 @@
     <dependency>
       <groupId>org.sonarsource.java</groupId>
       <artifactId>sonar-java-plugin</artifactId>
-      <version>4.0</version><!-- used by sonar-findbugs 3.5 -->
+      <version>5.4.0.14284</version><!-- used by sonar-findbugs 3.5 -->
       <scope>provided</scope>
     </dependency>
   </dependencies>
