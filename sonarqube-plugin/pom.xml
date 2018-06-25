@@ -20,6 +20,7 @@
           <pluginDescription><![CDATA[Support migration from Guava to Java8]]></pluginDescription>
           <pluginClass>jp.skypencil.guava.SonarQubePlugin</pluginClass>
           <useChildFirstClassLoader>false</useChildFirstClassLoader>
+          <basePlugin>findbugs</basePlugin>
           <requirePlugins>findbugs:3.5</requirePlugins><!-- the version introduced SpotBugs 3.1 -->
           <pluginUrl>https://github.com/KengoTODA/guava-helper-for-java-8</pluginUrl>
           <pluginSourcesUrl>https://github.com/KengoTODA/guava-helper-for-java-8</pluginSourcesUrl>

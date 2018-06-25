@@ -5,7 +5,7 @@ import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
 public class SonarQubeRulesDefinition implements RulesDefinition {
-  public static final String REPOSITORY_KEY = "guava-helper";
+  public static final String REPOSITORY_KEY = "findbugs";
   public static final String REPOSITORY_NAME = "GuavaHelper";
   public static final int RULE_COUNT = 1;
 
