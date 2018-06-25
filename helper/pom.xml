@@ -3,9 +3,10 @@
   <parent>
     <groupId>jp.skypencil.guava</groupId>
     <artifactId>guava-helper-for-java-8</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
   <artifactId>helper</artifactId>
+  <name>Helper for Guava on Java8</name>
   <description>Helper classes to help Java8 to collaborate with Guava</description>
   <dependencies>
     <dependency>

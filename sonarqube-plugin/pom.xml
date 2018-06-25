@@ -3,10 +3,11 @@
   <parent>
     <groupId>jp.skypencil.guava</groupId>
     <artifactId>guava-helper-for-java-8</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
   <artifactId>guava-helper-sonarqube-plugin</artifactId>
-  <name>Guava helper for Java8 SonarQube plugin</name>
+  <name>SonarQube plugin</name>
+  <description>A SonarQube plugin to help migration from Guava to Java8</description>
   <packaging>sonar-plugin</packaging>
   <build>
     <plugins>

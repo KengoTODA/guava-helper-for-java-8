@@ -3,10 +3,11 @@
   <parent>
     <groupId>jp.skypencil.guava</groupId>
     <artifactId>guava-helper-for-java-8</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
   <artifactId>spotbugs-plugin</artifactId>
-  <description>A spotbugs plugin to migrate from Guava to Java8</description>
+  <name>SpotBugs plugin</name>
+  <description>A spotbugs plugin to help migration from Guava to Java8</description>
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -48,7 +49,7 @@
             </goals>
             <configuration>
               <shadedArtifactAttached>true</shadedArtifactAttached>
-              <shadedClassifierName>jackofall</shadedClassifierName>
+              <shadedClassifierName>shaded</shadedClassifierName>
             </configuration>
           </execution>
         </executions>

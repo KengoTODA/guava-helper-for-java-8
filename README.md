@@ -1,5 +1,5 @@
-A tool set to help developer to use Guava with Java 8
-=====================================================
+Migrate your code from legacy Guava to Java 8
+=============================================
 
 [![Travis CI Build Status](https://travis-ci.org/KengoTODA/guava-helper-for-java-8.svg)](https://travis-ci.org/KengoTODA/guava-helper-for-java-8)
 [![Javadocs](http://javadoc.io/badge/jp.skypencil.guava/helper.svg)](http://javadoc.io/doc/jp.skypencil.guava/helper)
@@ -55,7 +55,7 @@ To use this module in your Maven project, please add following configuration to 
 <dependency>
   <groupId>jp.skypencil.guava</groupId>
   <artifactId>helper</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
