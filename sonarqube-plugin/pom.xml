@@ -17,7 +17,8 @@
         <version>1.18.0.372</version>
         <extensions>true</extensions>
         <configuration>
-          <pluginName>GuavaHelper</pluginName>
+          <pluginKey>guava</pluginKey>
+          <pluginName>Guava Helper</pluginName>
           <pluginDescription><![CDATA[Support migration from Guava to Java8]]></pluginDescription>
           <pluginClass>jp.skypencil.guava.SonarQubePlugin</pluginClass>
           <useChildFirstClassLoader>false</useChildFirstClassLoader>
