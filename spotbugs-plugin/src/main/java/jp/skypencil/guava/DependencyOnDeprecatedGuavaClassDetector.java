@@ -39,7 +39,7 @@ public class DependencyOnDeprecatedGuavaClassDetector extends BytecodeScanningDe
     @Override
     public boolean beforeOpcode(int seen) {
         if ((seen == Const.INVOKESPECIAL) || (seen == Const.INVOKESTATIC)
-                || (seen == Const.INVOKEVIRTUAL) || (seen == Const.INVOKEDYNAMIC)) {
+                || (seen == Const.INVOKEVIRTUAL) || (seen == Const.INVOKEINTERFACE)) {
             @SlashedClassName
             String referenced = getClassConstantOperand();
             @SlashedClassName
