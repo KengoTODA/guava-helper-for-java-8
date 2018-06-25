@@ -31,7 +31,7 @@ To use this module in your Maven project, please add following configuration to 
       <plugin>
         <groupId>jp.skypencil.guava</groupId>
         <artifactId>spotbugs-plugin</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
       </plugin>
     </plugins>
   </configuration>
@@ -55,7 +55,7 @@ To use this module in your Maven project, please add following configuration to 
 <dependency>
   <groupId>jp.skypencil.guava</groupId>
   <artifactId>helper</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
