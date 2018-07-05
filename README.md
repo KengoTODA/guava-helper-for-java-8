@@ -31,7 +31,7 @@ To use this module in your Maven project, please add following configuration to 
       <plugin>
         <groupId>jp.skypencil.guava</groupId>
         <artifactId>spotbugs-plugin</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
       </plugin>
     </plugins>
   </configuration>
@@ -55,14 +55,14 @@ To use this module in your Maven project, please add following configuration to 
 <dependency>
   <groupId>jp.skypencil.guava</groupId>
   <artifactId>helper</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 </dependency>
 ```
 
 SonarQube plugin
 ----------------
 
-See [sonarqube/README.md](sonarqube/README.md) for detail.
+See [sonarqube-plugin/README.md](sonarqube-plugin/README.md) for detail.
 
 Change set
 ----------
