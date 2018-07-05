@@ -59,6 +59,11 @@ To use this module in your Maven project, please add following configuration to 
 </dependency>
 ```
 
+SonarQube plugin
+----------------
+
+See [sonarqube/README.md](sonarqube/README.md) for detail.
+
 Change set
 ----------
 
