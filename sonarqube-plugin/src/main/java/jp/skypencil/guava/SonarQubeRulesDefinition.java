@@ -6,13 +6,12 @@ import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 
 public class SonarQubeRulesDefinition implements RulesDefinition {
   public static final String REPOSITORY_KEY = "findbugs";
-  public static final String REPOSITORY_NAME = "GuavaHelper";
   public static final int RULE_COUNT = 1;
 
   @Override
   public void define(Context context) {
     NewRepository repository =
-        context.createRepository(REPOSITORY_KEY, Java.KEY).setName(REPOSITORY_NAME);
+        context.createRepository(REPOSITORY_KEY, Java.KEY);
 
     RulesDefinitionXmlLoader ruleLoader = new RulesDefinitionXmlLoader();
     ruleLoader.load(
