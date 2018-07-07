@@ -1,5 +1,8 @@
 # Guava Migration Helper SonarQube Plugin
 
+This is a SonarQube plugin that helps developer to find remaining tasks for migration.
+About the provided rules, see [README.md](../README.md#spotbugs-plugin) in this project root.
+
 ## Compatibility
 
 |Guava Migration Helper Version|SonarQube Version|SonarJava Version|sonar-findbugs Version|
