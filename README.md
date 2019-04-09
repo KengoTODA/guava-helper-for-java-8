@@ -25,7 +25,7 @@ To use this module in your Maven project, please add following configuration to 
 <plugin>
   <groupId>com.github.spotbugs</groupId>
   <artifactId>spotbugs-maven-plugin</artifactId>
-  <version>3.1.5</version>
+  <version>3.1.11</version>
   <configuration>
     <plugins>
       <plugin>
