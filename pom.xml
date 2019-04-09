@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>jp.skypencil.guava</groupId>
   <artifactId>guava-helper-for-java-8</artifactId>
-  <version>1.1.0</version>
+  <version>1.1.1-SNAPSHOT</version>
   <url>https://github.com/KengoTODA/guava-helper-for-java-8</url>
   <name>Guava Helper for Java 8</name>
   <description>A tool set to help developer to use Guava with Java 8</description>
@@ -16,7 +16,7 @@
     <connection>scm:git:git@github.com:KengoTODA/guava-helper-for-java-8.git</connection>
     <developerConnection>scm:git:git@github.com:KengoTODA/guava-helper-for-java-8.git</developerConnection>
     <url>git@github.com:KengoTODA/guava-helper-for-java-8.git</url>
-    <tag>v1.1.0</tag>
+    <tag>HEAD</tag>
   </scm>
   <distributionManagement>
     <snapshotRepository>
