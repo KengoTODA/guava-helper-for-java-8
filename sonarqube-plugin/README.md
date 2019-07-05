@@ -7,6 +7,7 @@ About the provided rules, see [README.md](../README.md#spotbugs-plugin) in this 
 
 |Guava Migration Helper Version|SonarQube Version|SonarJava Version|sonar-findbugs Version|
 |----|----|----|----|
+|v1.1.0|v7.9.0|v5.13.1.18282|v3.11|
 |v1.0.5|v6.7.4|v5.1.0.13090|v3.5|
 |v1.0.4|v5.6.6|v4.0|v3.5|
 

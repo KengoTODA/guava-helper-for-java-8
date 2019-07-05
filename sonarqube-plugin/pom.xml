@@ -22,7 +22,7 @@
           <pluginDescription><![CDATA[Support migration from Guava to Java8]]></pluginDescription>
           <pluginClass>jp.skypencil.guava.SonarQubePlugin</pluginClass>
           <basePlugin>findbugs</basePlugin>
-          <requirePlugins>findbugs:3.5</requirePlugins><!-- the version introduced SpotBugs 3.1 -->
+          <requirePlugins>findbugs:3.11</requirePlugins><!-- the version introduced SpotBugs 3.1 -->
           <pluginUrl>https://github.com/KengoTODA/guava-helper-for-java-8</pluginUrl>
           <pluginSourcesUrl>https://github.com/KengoTODA/guava-helper-for-java-8</pluginSourcesUrl>
         </configuration>
@@ -84,13 +84,13 @@
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-plugin-api</artifactId>
-      <version>6.7.4</version><!-- Latest LTS release -->
+      <version>7.9</version><!-- Latest LTS release -->
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.sonarsource.java</groupId>
       <artifactId>sonar-java-plugin</artifactId>
-      <version>5.1.0.13090</version><!-- used by sonar-findbugs 3.7 -->
+      <version>5.13.1.18282</version><!-- Bundled with SonarQube 7.9 -->
       <scope>provided</scope>
     </dependency>
   </dependencies>
