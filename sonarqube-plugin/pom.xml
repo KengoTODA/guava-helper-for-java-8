@@ -84,7 +84,7 @@
     <dependency>
       <groupId>org.sonarsource.sonarqube</groupId>
       <artifactId>sonar-plugin-api</artifactId>
-      <version>7.9.1</version><!-- Latest LTS release -->
+      <version>8.4.2.36762</version><!-- Latest LTS release -->
       <scope>provided</scope>
     </dependency>
     <dependency>
