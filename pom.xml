@@ -38,7 +38,7 @@
     </license>
   </licenses>
   <properties>
-    <spotbugs.version>4.1.1</spotbugs.version>
+    <spotbugs.version>4.1.3</spotbugs.version>
   </properties>
   <build>
     <pluginManagement>
